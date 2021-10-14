@@ -1,11 +1,12 @@
 import * as restify from 'restify';
 import { environment } from '../common/environment';
+import { Router } from '../common/router';
 
 export class Server {
 
     application: restify.Server;
 
-  initRoutes(): Promise<any> {
+  initRoutes(routers: Router[]): Promise<any> {
     return new Promise((resolve, reject) => {
       try {
         this.application = restify.createServer({
@@ -16,6 +17,10 @@ export class Server {
         this.application.use(restify.plugins.queryParser());
 
         //routes
+        for (let router of routers) {
+          router.applyRoutes(this.application)
+        }
+
         this.application.get('/info', [
             (req, resp, next) => {
                 if (req.userAgent() && req.userAgent().includes('MSI 7.0')) {
@@ -49,7 +54,7 @@ export class Server {
     });
   }
 
-  bootstrap(): Promise<Server> {
-    return this.initRoutes().then(() => this);
+  bootstrap(routers: Router[] = []): Promise<Server> {
+    return this.initRoutes(routers).then(() => this);
   }
 }
