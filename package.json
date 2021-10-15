@@ -9,6 +9,7 @@
   "author": "Lucas Vieira",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^4.7.32",
     "mongoose": "4.13.9",
     "nodemon": "^2.0.13",
     "restify": "6.3.4"
