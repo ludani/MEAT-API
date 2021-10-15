@@ -6,7 +6,8 @@ export class Server {
 
     application: restify.Server;
 
-    initlizeDb() {
+   /*  initlizeDb(): mongoose.MongooseThenable { */
+    initlizeDb(): mongoose.MongooseThenable {
       (<any>mongoose).Promise = global.Promise
       return mongoose.connect(environment.db.url, {
         useMongoClient: true
