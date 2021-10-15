@@ -24,8 +24,6 @@ export class Server {
         this.application.get('/info', [
             (req, resp, next) => {
                 if (req.userAgent() && req.userAgent().includes('MSI 7.0')) {
-                   // resp.status(400)
-                   // resp.json({message: 'Please, update your brower'})
                    let error: any = new Error()
                    error.statusCode = 400
                    error.message = 'Please, update your brower'
